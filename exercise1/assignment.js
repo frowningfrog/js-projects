@@ -3,19 +3,24 @@ function alertMessage(message) {
 }
 
 function getWelcomeMessage(name) {
-    console.log(name);
+    alert('Welcome, ' + name + '!');
 }
 
 function divide(a, b) {
-    console.log(a / b);
+    return (a / b);
 }
 
 function multiply(a, b) {
-    console.log(a * b);
+    return (a * b);
 }
 
-// using all functions
+// using first function
 alertMessage('greetings, programs')
-getWelcomeMessage('Tron');
-divide(10, 2);
-multiply(4, 5);
+
+// prompt for user input
+const username = prompt('Enter your name:');
+
+// use other functions
+getWelcomeMessage(username);
+alert(divide(10, 2));
+alert(multiply(4, 5));
