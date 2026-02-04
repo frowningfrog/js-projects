@@ -41,7 +41,10 @@ alert('The area of the circle is: ' + areaOfCircle(radius));
 
 const genPass = prompt('Enter the length for a random password:');
 
+console.time('password');
 password(genPass);
+console.timeEnd('password');
+console.log(`Generated password of length ${genPass}`);
 
 const [requiredChar, generatedPassword] = password(genPass);
 
