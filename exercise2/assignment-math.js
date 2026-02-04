@@ -1,18 +1,18 @@
 function areaOfCircle(radius) {
-    return Math.PI * radius * radius;
+    return Math.PI * radius * radius; // Area = πr²
 }
 
 function password(length) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
     let wip = '';
     for(let i=0; i < length; i++) {
-        wip += chars.charAt(Math.floor(Math.random() * chars.length));
+        wip += chars.charAt(Math.floor(Math.random() * chars.length)); // dice roll
     }
     return wip;
 }
 
 function taxCalc(price, taxRate) {
-    return +price + (price * (taxRate / 100));
+    return +price + (price * (taxRate / 100)); // + sign forces number type
 }
 
 const radius = prompt('Enter the radius of the circle:');
