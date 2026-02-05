@@ -8,9 +8,9 @@ function ageCheck(age, isStudent) {
 // function that spits out result
 function check(person) {
     if (ageCheck(person.age, person.isStudent)) {
-        console.log("Discount ticket granted ✅");
+        console.log(`Discount ticket granted ✅`);
     } else {
-        console.log("Regular ticket only ❌");
+        console.log(`Regular ticket only ❌`);
     }
 }
 
