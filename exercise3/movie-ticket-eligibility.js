@@ -17,7 +17,7 @@ function check(person) {
 // create person objects
 let person1 = { name: `Tron`, age: 20, isStudent: true };
 let person2 = { name: `Ram`, age: 20, isStudent: false };
-let person3 = { name: `MCP`, age: 17, isStudent: true };
+let person3 = { name: `Alan`, age: 17, isStudent: true };
 let person4 = { name: `Flynn`, age: 17, isStudent: false };
 
 // place people in array
