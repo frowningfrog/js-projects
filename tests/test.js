@@ -1,5 +1,12 @@
-let username = "tron";
+const food = ["apple", "banana", "carrot"];
 
-let capName = username[0].toUpperCase() + username.slice(1);
+function write() {
+    console.log(food);
+    console.log("---")
+}
 
-console.log(`Hello ${capName}!`);
+write();
+
+food.shift();
+
+write();
