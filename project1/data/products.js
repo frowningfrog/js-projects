@@ -23,5 +23,15 @@ export const products = [
         id: 5,
         name: 'Socks',
         price: 9.99
+    },
+    {
+        id: 6,
+        name: 'Jacket',
+        price: 59.99
+    },
+    {
+        id: 7,
+        name: 'Gloves',
+        price: 14.99
     }
 ];
