@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/frowningfrog/project1#readme",
   "dependencies": {
+    "prettier": "^3.8.1",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
