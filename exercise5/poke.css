@@ -24,3 +24,7 @@ p {
 #details, #stats {
     margin-top: 15px;
 }
+
+.bar {
+    margin: 15px;
+}

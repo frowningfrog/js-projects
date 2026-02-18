@@ -57,4 +57,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('stats').innerText += `${stat.stat.name.charAt(0).toUpperCase() + stat.stat.name.slice(1)}: ${stat.base_stat}\n`;
     });
   })
+
+  document.getElementById('search').addEventListener('click', () => {
+    const input = document.getElementById('userInput').value;
+    i = +input - 1;
+    pokeName = data.results[i].name;
+    pokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
+    document.getElementById('userInput').value = ``;
+    document.getElementById('userInput').placeholder = `Enter number`;
+    document.getElementById('box').innerHTML = `<img src="${pics[i].sprites.front_default}">`;
+    document.getElementById('pokemon-name').innerText = `${i+1}. ${pokeName}`;
+    document.getElementById('details').innerText = ``;
+    document.getElementById('stats').innerText = ``;
+  })
 })
+
