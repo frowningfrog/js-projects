@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const details = await deets.json();
       let is2 = ``;
       try {
-        if(await details.types[1].type.name){
+        if(details.types[1].type.name){
           is2 = `<p>Type 2: ${details.types[1].type.name.charAt(0).toUpperCase() + details.types[1].type.name.slice(1)}</p>`;
         }
       } catch (error) {
