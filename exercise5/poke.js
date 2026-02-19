@@ -27,8 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       pokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
       document.getElementById('box').innerHTML = `<img src="${pics[i].sprites.front_default}">`;
       document.getElementById('pokemon-name').innerText = `${i+1}. ${pokeName}`;
-      document.getElementById('details').innerText = ``;
-      document.getElementById('stats').innerText = ``;
+      redo();
     }
   })
 
@@ -39,23 +38,34 @@ document.addEventListener('DOMContentLoaded', async () => {
       pokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
       document.getElementById('box').innerHTML = `<img src="${pics[i].sprites.front_default}">`;
       document.getElementById('pokemon-name').innerText = `${i+1}. ${pokeName}`;
-      document.getElementById('details').innerText = ``;
-      document.getElementById('stats').innerText = ``;
+      redo();
     }
   })
 
-  document.getElementById('pokemon-name').addEventListener('click', async () => {
-    const deets = await fetch(`https://pokeapi.co/api/v2/pokemon/${data.results[i].name}`);
-    const details = await deets.json();
-    document.getElementById('details').innerHTML = `
-    <p>Weight: ${details.weight}</p>
-    <p>Height: ${details.height}</p>
-    <p>Type 1: ${details.types[0].type.name.charAt(0).toUpperCase() + details.types[0].type.name.slice(1)}</p>
-    <p>Type 2: ${details.types[1] ? details.types[1].type.name.charAt(0).toUpperCase() + details.types[1].type.name.slice(1) : 'none'}</p>`;
-    document.getElementById('stats').innerText = ``;
-    details.stats.forEach(stat => {
-      document.getElementById('stats').innerText += `${stat.stat.name.charAt(0).toUpperCase() + stat.stat.name.slice(1)}: ${stat.base_stat}\n`;
-    });
+  const list = document.querySelectorAll('#pokemon-name, #box');
+
+  list.forEach(thing => {
+    thing.addEventListener('click', async () => {
+      const deets = await fetch(`https://pokeapi.co/api/v2/pokemon/${data.results[i].name}`);
+      const details = await deets.json();
+      let is2 = ``;
+      try {
+        if(await details.types[1].type.name){
+          is2 = `<p>Type 2: ${details.types[1].type.name.charAt(0).toUpperCase() + details.types[1].type.name.slice(1)}</p>`;
+        }
+      } catch (error) {
+      }
+
+      document.getElementById('details').innerHTML = `
+      <p>Weight: ${details.weight}</p>
+      <p>Height: ${details.height}</p>
+      <p>Type 1: ${details.types[0].type.name.charAt(0).toUpperCase() + details.types[0].type.name.slice(1)}</p>
+      ${is2}`;
+      document.getElementById('stats').innerText = ``;
+      details.stats.forEach(stat => {
+        document.getElementById('stats').innerText += `${stat.stat.name.charAt(0).toUpperCase() + stat.stat.name.slice(1)}: ${stat.base_stat}\n`;
+      });
+    })
   })
 
   document.getElementById('search').addEventListener('click', () => {
@@ -68,9 +78,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('userInput').placeholder = `Enter number`;
       document.getElementById('box').innerHTML = `<img src="${pics[i].sprites.front_default}">`;
       document.getElementById('pokemon-name').innerText = `${i+1}. ${pokeName}`;
-      document.getElementById('details').innerText = ``;
-      document.getElementById('stats').innerText = ``;
+      redo();
     }
   })
 })
 
+function redo() {
+  document.getElementById('details').innerText = ``;
+  document.getElementById('stats').innerText = ``;
+}
