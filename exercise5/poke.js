@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       } catch (error) {
       }
-      //////
+      ////// can do finally as well
 
       document.getElementById('details').innerHTML = `
       <p>Weight: ${details.weight}</p>
