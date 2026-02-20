@@ -49,12 +49,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       const deets = await fetch(`https://pokeapi.co/api/v2/pokemon/${data.results[i].name}`);
       const details = await deets.json();
       let is2 = ``;
+
+      //////
       try {
         if(details.types[1].type.name){
           is2 = `<p>Type 2: ${details.types[1].type.name.charAt(0).toUpperCase() + details.types[1].type.name.slice(1)}</p>`;
         }
       } catch (error) {
       }
+      //////
 
       document.getElementById('details').innerHTML = `
       <p>Weight: ${details.weight}</p>
