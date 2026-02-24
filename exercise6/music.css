@@ -1,3 +1,7 @@
-#controls {
+#open {
   display: flex;
+}
+
+#status {
+    margin-right: 12px;
 }
