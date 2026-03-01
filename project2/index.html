@@ -8,6 +8,10 @@
 </head>
 <body>
   <h1>Bid App</h1>
+  <div id="highestBox">
+    <p>Highest Bidder</p>
+    <span id="highestBid"></span>
+  </div>
   <div>
     <span>Bidder 1</span>
     <input type="text" id="bidder1" class="bar">
@@ -17,6 +21,10 @@
     <span>Bidder 2</span>
     <input type="text" id="bidder2" class="bar">
     <button id="bid2" class="bar">Place Bid</button>
+  </div>
+  <button id="clear">Clear Bids</button>
+  <div id="bidHistory">
+    <ul id="bidList"></ul>
   </div>
   <script src="js/app.js"></script>
 </body>
