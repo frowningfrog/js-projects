@@ -1,8 +1,10 @@
-import { getData } from "./api.js";
+import { getClasses } from "./api.js";
 
 async function fetchData() {
-  const result =await getData();
-  console.log(result);
+  const result = await getClasses();
+  return result;
 }
 
-fetchData();
+const data = await fetchData();
+
+console.log(data[10].name);
