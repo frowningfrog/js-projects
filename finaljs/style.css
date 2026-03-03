@@ -9,8 +9,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 60vh;
-    margin-top: 16vh;
+    height: 75vh;
+    margin-top: 12vh;
     background-color: #4fa17f;
     border-radius: 30px;
     width: 100%; 
