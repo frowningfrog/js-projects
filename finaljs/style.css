@@ -1,0 +1,24 @@
+body {
+    justify-content: center;
+    display: flex;
+    background-color: #b9a85c;
+    font-family: 'Merienda', sans-serif;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    height: 60vh;
+    margin-top: 16vh;
+    background-color: #4fa17f;
+    border-radius: 30px;
+    width: 100%; 
+    min-width: 300px;
+    max-width: 600px;
+}
+
+.title {
+    font-size: 3em;
+    font-weight: 600;
+    padding-top: 10px;
+}
