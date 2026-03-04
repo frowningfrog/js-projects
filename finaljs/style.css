@@ -22,6 +22,22 @@ body {
     font-weight: 600;
 }
 
+.choice {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 1.5em;
+    background-color: #d080ff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.choice:hover {
+    background-color: #c060ff;
+}
+
 #start-btn {
     display: flex;
     justify-content: center;

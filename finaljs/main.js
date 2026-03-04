@@ -16,23 +16,29 @@ const questionList = cquestions;
 
 const answered = [];
 
-console.log(classes[0].classInfo.name);
-
 for(let i=0; i<10; i++) {
   let getClass = classes[roll(classes.length)];
   let q = roll(questionList.length);
 
-  if(answered.some(e => e[0].class === getClass.classInfo.name && e[0].question === questionList[q].question(getClass.classInfo))) {
+  if(answered.some(e => e[0].class === getClass.classInfo.name && e[0].question === questionList[q].question(getClass))) {
     i--;
     continue;
   }
 
-  console.log(questionList[q].question(getClass.classInfo));
+  console.log(questionList[q].question(getClass));
 
-  console.log(questionList[q].answer(getClass.classInfo, roll(getClass.classInfo.subclasses.length)));
+  let lev = roll(getClass.levels.length);
+  let fea = roll(getClass.levels[lev].features.length);
+
+  while(getClass.levels[lev].features.length === 0 || getClass.levels[lev].features[fea].name === 'Ability Score Improvement') {
+    lev = roll(getClass.levels.length);
+    fea = roll(getClass.levels[lev].features.length);
+  }
+
+  console.log(questionList[q].answer(getClass, roll(getClass.classInfo.subclasses.length), lev, fea));
 
   answered.push([{
     class: getClass.classInfo.name,
-    question: questionList[q].question(getClass.classInfo)
+    question: questionList[q].question(getClass)
   }]);
 };

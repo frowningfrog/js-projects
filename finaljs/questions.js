@@ -1,10 +1,17 @@
 export const cquestions = [
+    // {
+    //     question: ({classInfo}) => `What is the hit die of a ${classInfo.name}?`,
+
+    //     answer: ({classInfo}) => classInfo.hit_die,
+    // },
+    // {
+    //     question: ({classInfo}) => `What is a subclass of a ${classInfo.name}?`,
+
+    //     answer: ({classInfo}, sub) => classInfo.subclasses.length > 0 ? classInfo.subclasses[sub].name : 'No subclasses',
+    // },
     {
-        question: (classname) => `What is the hit die of a ${classname.name}?`,
-        answer: (classname) => classname.hit_die,
-    },
-    {
-        question: (classname) => `What is a subclass of a ${classname.name}?`,
-        answer: (classname, num) => classname.subclasses.length > 0 ? classname.subclasses[num].name : "No subclasses",
-    },
+        question: ({classInfo}) => `What is a feature of a ${classInfo.name}?`,
+        
+        answer: ({levels}, sub, lev, fea) => levels[lev].features[fea].name
+    }
 ];
