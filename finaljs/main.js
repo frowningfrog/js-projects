@@ -10,6 +10,27 @@ function roll(num) {
   return Math.floor(Math.random() * num);
 }
 
+const pickQuiz = null;
+
+const selectClass = document.getElementById('class');
+const selectMonster = document.getElementById('monster');
+
+selectMonster.addEventListener('click', () => {
+  selectClass.style.border = 'none';
+  selectClass.classList.remove('highlight');
+  selectMonster.style.border = '2px solid black';
+  selectMonster.classList.add('highlight');
+  pickQuiz = 'monster';
+});
+
+selectClass.addEventListener('click', async () => {
+  selectClass.style.border = '2px solid black';
+  selectClass.classList.add('highlight');
+  selectMonster.style.border = 'none';
+  selectMonster.classList.remove('highlight');
+  pickQuiz = 'class';
+});
+
 const classes = await fetchData();
 
 const questionList = cquestions;
