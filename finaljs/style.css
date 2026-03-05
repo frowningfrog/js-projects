@@ -57,3 +57,7 @@ body {
 #start-btn:hover {
     background-color: #ffdb4d;
 }
+
+#displayQ {
+    font-size: 1.5em;
+}
