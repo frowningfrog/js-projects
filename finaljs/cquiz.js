@@ -10,19 +10,18 @@ let score = 0;
 function checkAnswer(ans) {
     if(ans === displayList[current].a[0]) {
         score++;
-        alert('Correct!');
-    } else {
-        alert('Wrong!');
     }
     document.getElementById('score').innerText = `Score: ${score}`;
-    current++;
+    
     document.getElementById('pickone').innerHTML = '';
-    renderQ()
-    if(current === displayList.length-1) {
-        document.getElementById('main').innerHTML = `
+    current++;
+    if(current < displayList.length) {
+        renderQ()
+    } else {
+        document.getElementById('quiz').innerHTML = ``;
+        document.getElementById('quiz').innerHTML = `
         <div class="title">Quiz Complete!</div>
         <div id="score">Final Score: ${score}/10</div>`;
-        alert(`Quiz complete! Final score: ${score}/10`);
         localStorage.removeItem('displayList');
     }
 }
@@ -166,7 +165,7 @@ const renderQ =  () => {
     })
 }
 
-renderQ()
+renderQ();
 
 document.addEventListener('click', (e) => {
     if(e.target.classList.contains('answer')) {
