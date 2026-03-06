@@ -4,7 +4,7 @@ body {
     font-family: 'Merienda', sans-serif;
 }
 
-.main {
+#main {
     padding: 2em;
     display: flex;
     flex-direction: column;

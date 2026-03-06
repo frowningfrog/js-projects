@@ -5,8 +5,30 @@ import { classes } from "./main.js";
 const questionList = cquestions;
 const displayList = /*JSON.parse(localStorage.getItem('displayList')) || */[];
 const answered = [];
+let score = 0;
+
+function checkAnswer(ans) {
+    if(ans === displayList[current].a[0]) {
+        score++;
+        alert('Correct!');
+    } else {
+        alert('Wrong!');
+    }
+    document.getElementById('score').innerText = `Score: ${score}`;
+    current++;
+    document.getElementById('pickone').innerHTML = '';
+    renderQ()
+    if(current === displayList.length-1) {
+        document.getElementById('main').innerHTML = `
+        <div class="title">Quiz Complete!</div>
+        <div id="score">Final Score: ${score}/10</div>`;
+        alert(`Quiz complete! Final score: ${score}/10`);
+        localStorage.removeItem('displayList');
+    }
+}
 
 if(displayList.length === 0) {
+  score = 0;
   for(let i=0; i<10; i++) {
     let getClass = classes[roll(classes.length)];
     let wrongClassList = classes.filter(c => c.classInfo.name !== getClass.classInfo.name);
@@ -18,14 +40,15 @@ if(displayList.length === 0) {
         continue;
     }
 
+    let wrongClass;
+    let wrongClasses = [];
+
     if(q == 2) {
         let lev = roll(getClass.levels.length);
-        let fea = roll(getClass.levels[lev].features.length);
-        let wrongClasses = [];
+        let fea = roll(getClass.levels[lev].features.length)
 
-        let wrongClass = wrongClassList[roll(wrongClassList.length)];
-        let wrongLev = roll(wrongClass.levels.length);
-        let wrongFea = roll(wrongClass.levels[wrongLev].features.length);
+        let wrongLev;
+        let wrongFea;
 
         for(let i = 0; i < 3; i++) {
             wrongClass = wrongClassList[roll(wrongClassList.length)];
@@ -68,15 +91,57 @@ if(displayList.length === 0) {
     } else 
     if(q == 1) {
         let sub = roll(getClass.classInfo.subclasses.length);
-        console.log(getClass.classInfo.subclasses[sub].name);
-        //let wrongSubs = wrongClassList.filter(wc => wc.classInfo.subclasses);
+
+        for(let i = 0; i < 3; i++) {
+            wrongClass = wrongClassList[roll(wrongClassList.length)];
+
+            while(wrongClasses.some(wc => wc.classInfo.subclasses[sub].name === wrongClass.classInfo.subclasses[sub].name)) {
+                wrongClass = wrongClassList[roll(wrongClassList.length)];
+            }
+
+            wrongClasses.push(wrongClass);
+
+            if(wrongClasses.length === 3) {
+                wrongClasses.forEach(wc => console.log(wc.classInfo.name));
+            };
+            console.log('---');
+        }
 
         displayList.push({
             q: questionList[q].question(getClass),
-            // a: [questionList[q].answer(getClass, lev, fea),
-            // wrongClasses[0].wrongClass.levels[wrongClasses[0].wrongLev].features[wrongClasses[0].wrongFea].name,
-            // wrongClasses[1].wrongClass.levels[wrongClasses[1].wrongLev].features[wrongClasses[1].wrongFea].name,
-            // wrongClasses[2].wrongClass.levels[wrongClasses[2].wrongLev].features[wrongClasses[2].wrongFea].name]
+            a: [questionList[q].answer(getClass, sub),
+            wrongClasses[0].classInfo.subclasses[sub].name,
+            wrongClasses[1].classInfo.subclasses[sub].name,
+            wrongClasses[2].classInfo.subclasses[sub].name]
+        });
+
+        answered.push([{
+            class: getClass.classInfo.name,
+            question: questionList[q].question(getClass)
+        }]);
+    } else 
+    if(q == 0) {
+        for(let i = 0; i < 3; i++) {
+            wrongClass = wrongClassList[roll(wrongClassList.length)];
+
+            while(String(getClass.classInfo.hit_die) === String(wrongClass.classInfo.hit_die) || wrongClasses.some(wc => String(wc.classInfo.hit_die) === String(wrongClass.classInfo.hit_die))) {
+                wrongClass = wrongClassList[roll(wrongClassList.length)];
+            }
+
+            wrongClasses.push(wrongClass);
+
+            if(wrongClasses.length === 3) {
+                wrongClasses.forEach(wc => console.log(String(wc.classInfo.hit_die)));
+            };
+            console.log('---');
+        }
+
+        displayList.push({
+            q: questionList[q].question(getClass),
+            a: [String(questionList[q].answer(getClass)),
+            String(wrongClasses[0].classInfo.hit_die),
+            String(wrongClasses[1].classInfo.hit_die),
+            String(wrongClasses[2].classInfo.hit_die)]
         });
 
         answered.push([{
@@ -84,7 +149,6 @@ if(displayList.length === 0) {
             question: questionList[q].question(getClass)
         }]);
     }
-    
   };
   localStorage.setItem('displayList', JSON.stringify(displayList));
 }
@@ -93,11 +157,19 @@ console.log(displayList);
 
 let current = 0;
 
-document.getElementById('displayQ').innerText = displayList[current].q;
+const renderQ =  () => {
+    document.getElementById('displayQ').innerText = displayList[current].q;
+    let nums = [0, 1, 2, 3];
+    nums.sort(() => roll(4) - 2);
+    ['one', 'two', 'three', 'four'].forEach((id, index) => {
+        document.getElementById('pickone').innerHTML += `<button id="${id}" data-index="${index}" class="answer">${displayList[current].a[nums[index]]}</button>`;
+    })
+}
 
-document.getElementById('pickone').innerHTML = `
-<button class="answer" onclick="checkAnswer('${displayList[current].a[0]}')">${displayList[current].a[0]}</button>
-<button class="answer" onclick="checkAnswer('${displayList[current].a[1]}')">${displayList[current].a[1]}</button>
-<button class="answer" onclick="checkAnswer('${displayList[current].a[2]}')">${displayList[current].a[2]}</button>
-<button class="answer" onclick="checkAnswer('${displayList[current].a[3]}')">${displayList[current].a[3]}</button>
-`;
+renderQ()
+
+document.addEventListener('click', (e) => {
+    if(e.target.classList.contains('answer')) {
+        checkAnswer(e.target.innerText);
+    }
+});

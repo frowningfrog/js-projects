@@ -24,7 +24,7 @@ if(selectMonster) {
     selectMonster.classList.add('highlight');
     pickQuiz = 'monster';
   });
-}
+} else
 
 if(selectClass) {
   selectClass.addEventListener('click', async () => {
