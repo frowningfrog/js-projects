@@ -5,8 +5,6 @@ async function fetchData() {
   return result;
 }
 
-export const classes = await fetchData();
-
 export function roll(num) {
   return Math.floor(Math.random() * num);
 }
@@ -48,3 +46,5 @@ if(sbtn) {
     }
   });
 }
+
+export const classes = await fetchData();
