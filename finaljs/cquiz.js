@@ -114,8 +114,8 @@ if(displayList.length === 0) {
     answered.push({
         class: getClass.name,
         question: questionList[q].question(getClass)
-    });
-  };
+    })
+  }
   localStorage.setItem('displayList', JSON.stringify(displayList));
   console.log(displayList);
 }

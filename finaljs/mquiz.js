@@ -7,9 +7,14 @@ const questionList = mquestions;
 if(displayList.length === 0) {
   for(let i=0; i<amountOfQuestions; i++) {
     let getMonster = monsters[roll(monsters.length)];
-    console.log('mon:', getMonster);
     let wrongMonList = monsters.filter(m => m.name !== getMonster.name);
     let q = roll(questionList.length);
+
+    //skip if already answered for monster
+    if(answered.some(e => e.mon === getMonster.name && e.question === questionList[q].question(getMonster))) {
+        i--;
+        continue;
+    }
 
     let wrongMon;
     let wrongMons = [];
@@ -18,12 +23,13 @@ if(displayList.length === 0) {
         for(let wm = 0; wm < 3; wm++) {
             wrongMon = wrongMonList[roll(wrongMonList.length)];
 
-            while(wrongMons.some(wmon => wmon.hit_points === wrongMon.hit_points)) {
+            while(wrongMons.some(wmon => wmon.hit_points === wrongMon.hit_points || wmon.hit_points === getMonster.hit_points)) {
                 wrongMon = wrongMonList[roll(wrongMonList.length)];
             }
-
             wrongMons.push(wrongMon);
         }
+
+        console.log(getMonster, wrongMons);
 
         displayList.push({
             q: questionList[q].question(getMonster),
@@ -35,6 +41,11 @@ if(displayList.length === 0) {
             ]
         })
     }
+
+    answered.push({
+        mon: getMonster.name,
+        question: questionList[q].question(getMonster)
+    })
   }
   console.log(displayList);
 }
