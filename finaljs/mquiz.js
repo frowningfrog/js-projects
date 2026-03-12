@@ -29,8 +29,6 @@ if(displayList.length === 0) {
             wrongMons.push(wrongMon);
         }
 
-        console.log(getMonster, wrongMons);
-
         displayList.push({
             q: questionList[q].question(getMonster),
             a: [

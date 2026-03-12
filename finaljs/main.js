@@ -30,7 +30,6 @@ if(selectMonster) {
     selectMonster.style.border = '2px solid black';
     selectMonster.classList.add('highlight');
     pickQuiz = 'monster';
-    console.log(pickQuiz);
   });
 }
 
@@ -41,7 +40,6 @@ if(selectClass) {
     selectMonster.style.border = 'none';
     selectMonster.classList.remove('highlight');
     pickQuiz = 'class';
-    console.log(pickQuiz);
   });
 }
 
