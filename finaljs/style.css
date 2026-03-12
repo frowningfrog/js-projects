@@ -69,6 +69,14 @@ body {
     min-width: 100px;
 }
 
+#pickone button:hover {
+    background-color: #fdbb2b;
+}
+
+#pickone button:active {
+    background-color: #a92bfd;
+}
+
 @media screen and (min-width: 600px) {
     #pickone button {
         min-width: 200px;

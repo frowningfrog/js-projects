@@ -54,5 +54,13 @@ if(sbtn) {
   });
 }
 
-export const classes = await fetchData();
-export const monsters = await fetchM();
+export const classes = JSON.parse(localStorage.getItem('cData')) || await fetchData();
+export const monsters = JSON.parse(localStorage.getItem('monsData')) || await fetchM();
+
+if(!JSON.parse(localStorage.getItem('cData'))) {
+  localStorage.setItem('cData', JSON.stringify(classes));
+}
+
+if(!JSON.parse(localStorage.getItem('monsData'))) {
+  localStorage.setItem('monsData', JSON.stringify(monsters));
+}
