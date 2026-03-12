@@ -1,22 +1,15 @@
 import { cquestions } from "./questions.js";
-import { roll, classes } from "./main.js";
+import { roll, classes, amountOfQuestions, answered } from "./main.js";
 import { renderQ, setupListeners, displayList } from "./quizengine.js";
 
 const questionList = cquestions;
 
-const answered = [];
-
-const amountOfQuestions = 10;
-
-console.log(classes);
-
 if(displayList.length === 0) {
   for(let i=0; i<amountOfQuestions; i++) {
     let getClass = classes[roll(classes.length)];
-    console.log(getClass.name);
     let wrongClassList = classes.filter(c => c.name !== getClass.name);
     let q = roll(questionList.length);
-    console.log(q);
+
     //skip question if already been answered for this class
     if(answered.some(e => e.class === getClass.name && e.question === questionList[q].question(getClass))) {
         i--;
@@ -26,9 +19,7 @@ if(displayList.length === 0) {
     let wrongClass;
     let wrongClasses = [];
 
-    if(q == 2) {
-        console.log(getClass.levels[0].features[0].name);
-
+    if(q === 2) {
         let lev = roll(getClass.levels.length);
         let fea = roll(getClass.levels[lev].features.length);
 
@@ -48,10 +39,10 @@ if(displayList.length === 0) {
 
             wrongClasses.push({wrongClass, wrongLev, wrongFea});
 
-            if(wrongClasses.length === 3) {
-                wrongClasses.forEach(wc => console.log(wc.wrongClass.name));
-            };
-            console.log('---');
+            // if(wrongClasses.length === 3) {
+            //     wrongClasses.forEach(wc => console.log(wc.wrongClass.name));
+            // };
+            // console.log('---');
         }
 
         // skip if no features or is ability score improvement
@@ -68,9 +59,9 @@ if(displayList.length === 0) {
                 wrongClasses[1].wrongClass.levels[wrongClasses[1].wrongLev].features[wrongClasses[1].wrongFea].name,
                 wrongClasses[2].wrongClass.levels[wrongClasses[2].wrongLev].features[wrongClasses[2].wrongFea].name
             ]
-        });
+        })
     } else 
-    if(q == 1) {
+    if(q === 1) {
         let sub = roll(getClass.subclasses.length);
 
         for(let i = 0; i < 3; i++) {
@@ -82,10 +73,10 @@ if(displayList.length === 0) {
 
             wrongClasses.push(wrongClass);
 
-            if(wrongClasses.length === 3) {
-                wrongClasses.forEach(wc => console.log(wc.name));
-            };
-            console.log('---');
+            // if(wrongClasses.length === 3) {
+            //     wrongClasses.forEach(wc => console.log(wc.name));
+            // };
+            // console.log('---');
         }
 
         displayList.push({
@@ -96,20 +87,19 @@ if(displayList.length === 0) {
             wrongClasses[2].subclasses[sub].name]
         });
     } else 
-    if(q == 0) {
+    if(q === 0) {
         for(let i = 0; i < 3; i++) {
             wrongClass = wrongClassList[roll(wrongClassList.length)];
-
             while(String(getClass.hit_die) === String(wrongClass.hit_die) || wrongClasses.some(wc => String(wc.hit_die) === String(wrongClass.hit_die))) {
                 wrongClass = wrongClassList[roll(wrongClassList.length)];
             }
 
             wrongClasses.push(wrongClass);
 
-            if(wrongClasses.length === 3) {
-                wrongClasses.forEach(wc => console.log(wc.name));
-            };
-            console.log('---');
+            // if(wrongClasses.length === 3) {
+            //     wrongClasses.forEach(wc => console.log(wc.name));
+            // };
+            // console.log('---');
         }
 
         displayList.push({

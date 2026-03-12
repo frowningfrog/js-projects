@@ -1,13 +1,22 @@
-import { getClasses } from "./api.js";
+import { getClasses, getMonsters } from "./api.js";
 
 async function fetchData() {
   const result = await getClasses();
   return result;
 }
 
+async function fetchM() {
+  const result = await getMonsters();
+  return result;
+}
+
 export function roll(num) {
   return Math.floor(Math.random() * num);
 }
+
+export const answered = [];
+
+export const amountOfQuestions = 10;
 
 let pickQuiz;
 
@@ -48,3 +57,4 @@ if(sbtn) {
 }
 
 export const classes = await fetchData();
+export const monsters = await fetchM();

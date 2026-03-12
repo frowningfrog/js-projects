@@ -15,3 +15,11 @@ export const cquestions = [
         answer: ({levels}, lev, fea) => levels[lev].features[fea].name,
     }
 ];
+
+export const mquestions = [
+    {
+        question: (mob) => `What is the hp of a ${mob.name}?`,
+
+        answer: (mob) => mob.hit_points,
+    },
+];
