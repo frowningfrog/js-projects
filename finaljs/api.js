@@ -108,7 +108,6 @@ const GetMonstersQuery = `
   query GetMonsters($limit: Int) {
     monsters(limit: $limit) {
       name
-      hit_dice
       hit_points
       type
     }

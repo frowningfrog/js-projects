@@ -11,7 +11,7 @@ if(displayList.length === 0) {
     let q = roll(questionList.length);
 
     //skip if already answered for monster
-    if(answered.some(e => e.mon === getMonster.name && e.question === questionList[q].question(getMonster))) {
+    if(answered.some(e => e.mon === getMonster.name)) {
         i--;
         continue;
     }
@@ -19,14 +19,36 @@ if(displayList.length === 0) {
     let wrongMon;
     let wrongMons = [];
 
+    if(q === 1) {
+        for(let wm = 0; wm < 3; wm++) {
+            wrongMon = wrongMonList[roll(wrongMonList.length)];
+
+            if(wrongMons.some(wmon => wmon.type === wrongMon.type) || wrongMon.type === getMonster.type) {
+                --wm;
+            } else {
+                wrongMons.push(wrongMon);
+            }
+        }
+
+        displayList.push({
+            q: questionList[q].question(getMonster),
+            a: [
+                questionList[q].answer(getMonster),
+                wrongMons[0].type,
+                wrongMons[1].type,
+                wrongMons[2].type
+            ]
+        })
+    } else
     if(q === 0) {
         for(let wm = 0; wm < 3; wm++) {
             wrongMon = wrongMonList[roll(wrongMonList.length)];
 
-            while(wrongMons.some(wmon => wmon.hit_points === wrongMon.hit_points || wmon.hit_points === getMonster.hit_points)) {
-                wrongMon = wrongMonList[roll(wrongMonList.length)];
+            if(wrongMons.some(wmon => wmon.hit_points === wrongMon.hit_points) || wrongMon.hit_points === getMonster.hit_points) {
+                --wm;
+            } else {
+                wrongMons.push(wrongMon);
             }
-            wrongMons.push(wrongMon);
         }
 
         displayList.push({
@@ -45,8 +67,9 @@ if(displayList.length === 0) {
         question: questionList[q].question(getMonster)
     })
   }
-  console.log(displayList);
 }
+
+console.log(displayList);
 
 renderQ();
 
