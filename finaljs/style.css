@@ -60,13 +60,20 @@ body {
 
 #displayQ {
     font-size: 1.5em;
+    justify-content: center;
+    display: flex;
+}
+
+#pickone {
+    margin-left: 6%;
 }
 
 #pickone button {
     margin: .25em;
     padding: 1em;
     border-radius: 10px;
-    min-width: 100px;
+    min-width: 125px;
+    width: 45%;
 }
 
 #pickone button:hover {
@@ -75,11 +82,4 @@ body {
 
 #pickone button:active {
     background-color: #a92bfd;
-}
-
-@media screen and (min-width: 600px) {
-    #pickone button {
-        min-width: 200px;
-        margin: 1em;
-    }
 }
