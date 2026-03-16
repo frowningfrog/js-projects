@@ -23,11 +23,16 @@ export function setupListeners() { document.addEventListener('click', (e) => {
     if(e.target.classList.contains('next')) {
         current++;
         if(current < displayList.length) {
-            renderQ()
+            renderQ();
         } else {
             document.getElementById('quiz').innerHTML = ``;
             document.getElementById('quiz').innerHTML = `
             <div class="title">Quiz Complete!</div>
+            <div id="displayQ"></div>
+            <div id="pickone">
+            <a href="index.html"><button>Home</button></a>
+            <a href="stats.html"><button>Stats</button></a>
+            </div>
             <div id="score">Final Score: ${score}/10</div>`;
             localStorage.removeItem('displayList');
         }
