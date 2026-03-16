@@ -22,6 +22,10 @@ body {
     font-weight: 600;
 }
 
+.para {
+    margin-top: 2em;
+}
+
 .choice {
     display: flex;
     justify-content: center;
