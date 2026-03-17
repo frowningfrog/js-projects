@@ -89,7 +89,7 @@ body {
     background-color: #a92bfd;
 }
 
-.gotoHome, .gotoStats {
+.gotoHome, .gotoStats, .next {
     display: flex;
     justify-content: center;
     margin: 0 auto;
@@ -99,4 +99,8 @@ body {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+}
+
+#score {
+    margin: 0 auto;
 }

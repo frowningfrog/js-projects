@@ -14,6 +14,7 @@ export const renderQ =  () => {
     let nums = [0, 1, 2, 3];
     nums.sort(() => roll(4) - 2);
     document.getElementById('pickone').innerHTML = ``;
+    document.getElementById('n').innerHTML = ``;
     ['one', 'two', 'three', 'four'].forEach((id, index) => {
         document.getElementById('pickone').innerHTML += `<button id="${id}" data-index="${index}" class="answer">${displayList[current].a[nums[index]]}</button>`;
     })
@@ -31,9 +32,11 @@ export function setupListeners() { document.addEventListener('click', (e) => {
             document.getElementById('quiz').innerHTML = ``;
             document.getElementById('quiz').innerHTML = `
             <div class="title">Quiz Complete!</div>
-            <button class="gotoHome">Home</button>
-            <button class="gotoStats">Stats</button>
-            <div id="score">Final Score: ${score}/10</div>`;
+            <div id="score">Final Score: ${score}/10</div>
+            <div class="d-flex">
+                <button class="gotoHome">Home</button>
+                <button class="gotoStats">Stats</button>
+            </div><div></div>`;
             localStorage.removeItem('displayList');
             if(localStorage.getItem('quizType') === 'class') {
                 classStats.push(score);
@@ -57,7 +60,8 @@ function checkAnswer(ans) {
     }
     
     document.getElementById('displayQ').innerHTML = correct ? 'Correct!' : 'Incorrect.';
-    document.getElementById('pickone').innerHTML = `<button class="next">next</button>`;
+    document.getElementById('n').innerHTML = `<button class="next">next</button>`;
+    document.getElementById('pickone').innerHTML = ``;
     
     if(correct) {
         ++score;
