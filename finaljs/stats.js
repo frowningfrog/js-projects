@@ -24,7 +24,7 @@ classStats.forEach(i => {
 
 monStats.forEach(i => {
     const li = document.createElement('li');
-    li.textContent = i;
+    li.textContent = i.currentDate + ' ' + i.score;
     let mstats = document.getElementById('mstats');
     if(mstats) {
         mstats.appendChild(li);

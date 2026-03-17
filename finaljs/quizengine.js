@@ -38,12 +38,13 @@ export function setupListeners() { document.addEventListener('click', (e) => {
                 <button class="gotoStats">Stats</button>
             </div><div></div>`;
             localStorage.removeItem('displayList');
+            const currentDate = new Date().toLocaleDateString('en-US');
             if(localStorage.getItem('quizType') === 'class') {
-                classStats.push(score);
+                classStats.push({currentDate, score});
                 localStorage.setItem('classStats', JSON.stringify(classStats));
             } else 
             if(localStorage.getItem('quizType') === 'monster') {
-                monStats.push(score);
+                monStats.push({currentDate, score});
                 localStorage.setItem('monStats', JSON.stringify(monStats));
             }
             homeListen();
