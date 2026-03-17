@@ -9,6 +9,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-width: 333px;
     height: 75vh;
     margin-top: 12vh;
     background-color: #4fa17f;
@@ -86,4 +87,16 @@ body {
 
 #pickone button:active {
     background-color: #a92bfd;
+}
+
+.gotoHome, .gotoStats {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding-top: 5px;
+    width: 20%;
+    height: 2em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
 }

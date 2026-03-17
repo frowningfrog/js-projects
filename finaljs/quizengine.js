@@ -1,10 +1,13 @@
-import { roll } from "./main.js";
+import { roll, statListen } from "./main.js";
+import { homeListen } from "./stats.js";
 
 let score = 0;
 let current = 0;
 let correct = false;
 
 export const displayList = /*JSON.parse(localStorage.getItem('displayList')) || */[];
+let classStats = JSON.parse(localStorage.getItem('classStats')) || [];
+let monStats = JSON.parse(localStorage.getItem('monStats')) || [];
 
 export const renderQ =  () => {
     document.getElementById('displayQ').innerText = displayList[current].q;
@@ -28,13 +31,20 @@ export function setupListeners() { document.addEventListener('click', (e) => {
             document.getElementById('quiz').innerHTML = ``;
             document.getElementById('quiz').innerHTML = `
             <div class="title">Quiz Complete!</div>
-            <div id="displayQ"></div>
-            <div id="pickone">
-            <a href="index.html"><button>Home</button></a>
-            <a href="stats.html"><button>Stats</button></a>
-            </div>
+            <button class="gotoHome">Home</button>
+            <button class="gotoStats">Stats</button>
             <div id="score">Final Score: ${score}/10</div>`;
             localStorage.removeItem('displayList');
+            if(localStorage.getItem('quizType') === 'class') {
+                classStats.push(score);
+                localStorage.setItem('classStats', JSON.stringify(classStats));
+            } else 
+            if(localStorage.getItem('quizType') === 'monster') {
+                monStats.push(score);
+                localStorage.setItem('monStats', JSON.stringify(monStats));
+            }
+            homeListen();
+            statListen();
         }
     }
 })};

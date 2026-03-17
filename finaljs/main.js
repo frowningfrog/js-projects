@@ -14,6 +14,18 @@ export function roll(num) {
   return Math.floor(Math.random() * num);
 }
 
+export function statListen() {
+  const statbtn = document.querySelectorAll('.gotoStats');
+
+  if(statbtn) {
+    statbtn.forEach(btn => {
+      btn.addEventListener('click', function() {
+        location.href = 'stats.html';
+      })
+    })
+  }
+}
+
 export const answered = [];
 
 export const amountOfQuestions = 10;
@@ -53,6 +65,8 @@ if(sbtn) {
     }
   });
 }
+
+statListen();
 
 export const classes = JSON.parse(localStorage.getItem('cData')) || await fetchData();
 export const monsters = JSON.parse(localStorage.getItem('monsData')) || await fetchM();
