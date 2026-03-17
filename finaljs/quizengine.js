@@ -10,7 +10,7 @@ let classStats = JSON.parse(localStorage.getItem('classStats')) || [];
 let monStats = JSON.parse(localStorage.getItem('monStats')) || [];
 
 export const renderQ =  () => {
-    document.getElementById('displayQ').innerText = displayList[current].q;
+    document.getElementById('displayQ').innerText = `Question ${current + 1}: ` + displayList[current].q;
     let nums = [0, 1, 2, 3];
     nums.sort(() => roll(4) - 2);
     document.getElementById('pickone').innerHTML = ``;
