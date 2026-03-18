@@ -24,7 +24,8 @@ if(displayList.length === 0) {
             wrongMon = wrongMonList[roll(wrongMonList.length)];
 
             // reroll if rolled monster type matches wm list or answer
-            if(wrongMons.some(wmon => wmon.type === wrongMon.type) || wrongMon.type === getMonster.type) {
+            if(wrongMons.some(wmon => wmon.type === wrongMon.type) || 
+            wrongMon.type === getMonster.type) {
                 --wm;
             } else {
                 wrongMons.push(wrongMon);
@@ -46,7 +47,8 @@ if(displayList.length === 0) {
             wrongMon = wrongMonList[roll(wrongMonList.length)];
 
             // reroll if rolled monster hp matches wm list or answer
-            if(wrongMons.some(wmon => wmon.hit_points === wrongMon.hit_points) || wrongMon.hit_points === getMonster.hit_points) {
+            if(wrongMons.some(wmon => wmon.hit_points === wrongMon.hit_points) || 
+            wrongMon.hit_points === getMonster.hit_points) {
                 --wm;
             } else {
                 wrongMons.push(wrongMon);

@@ -10,8 +10,9 @@ if(displayList.length === 0) {
     let wrongClassList = classes.filter(c => c.name !== getClass.name);
     let q = roll(questionList.length);
 
-    //reroll question if already been answered for this class
-    if(answered.some(e => e.class === getClass.name && e.question === questionList[q].question(getClass))) {
+    // reroll question if already been answered for this class
+    if(answered.some(e => e.class === getClass.name && 
+    e.question === questionList[q].question(getClass))) {
         i--;
         continue;
     };
@@ -25,25 +26,28 @@ if(displayList.length === 0) {
 
         let wrongLev;
         let wrongFea;
+        
+        // reroll if no features or is ability score improvement
+        while(getClass.levels[lev].features.length === 0 || 
+        getClass.levels[lev].features[fea].name === 'Ability Score Improvement') {
+            lev = roll(getClass.levels.length);
+            fea = roll(getClass.levels[lev].features.length);
+        }
 
         for(let i = 0; i < 3; i++) {
             wrongClass = wrongClassList[roll(wrongClassList.length)];
             wrongLev = roll(wrongClass.levels.length);
             wrongFea = roll(wrongClass.levels[wrongLev].features.length);
 
-            while(wrongClass.levels[wrongLev].features.length === 0 || wrongClass.levels[wrongLev].features[wrongFea].name === 'Ability Score Improvement' || wrongClasses.some(wc => wc.name === wrongClass.name)) {
+            while(wrongClass.levels[wrongLev].features.length === 0 || 
+            wrongClass.levels[wrongLev].features[wrongFea].name === 'Ability Score Improvement' || 
+            wrongClasses.some(wc => wc.name === wrongClass.name)) {
                 wrongClass = wrongClassList[roll(wrongClassList.length)];
                 wrongLev = roll(wrongClass.levels.length);
                 wrongFea = roll(wrongClass.levels[wrongLev].features.length);
             }
 
             wrongClasses.push({wrongClass, wrongLev, wrongFea});
-        }
-
-        // reroll if no features or is ability score improvement
-        while(getClass.levels[lev].features.length === 0 || getClass.levels[lev].features[fea].name === 'Ability Score Improvement') {
-            lev = roll(getClass.levels.length);
-            fea = roll(getClass.levels[lev].features.length);
         }
 
         displayList.push({
@@ -62,6 +66,7 @@ if(displayList.length === 0) {
         for(let i = 0; i < 3; i++) {
             wrongClass = wrongClassList[roll(wrongClassList.length)];
 
+            // reroll if rolled sublass matches wrong sub list
             while(wrongClasses.some(wc => wc.subclasses[sub].name === wrongClass.subclasses[sub].name)) {
                 wrongClass = wrongClassList[roll(wrongClassList.length)];
             }
@@ -71,16 +76,21 @@ if(displayList.length === 0) {
 
         displayList.push({
             q: questionList[q].question(getClass),
-            a: [questionList[q].answer(getClass, sub),
-            wrongClasses[0].subclasses[sub].name,
-            wrongClasses[1].subclasses[sub].name,
-            wrongClasses[2].subclasses[sub].name]
+            a: [
+                questionList[q].answer(getClass, sub),
+                wrongClasses[0].subclasses[sub].name,
+                wrongClasses[1].subclasses[sub].name,
+                wrongClasses[2].subclasses[sub].name
+            ]
         });
     } else 
     if(q === 0) {
         for(let i = 0; i < 3; i++) {
             wrongClass = wrongClassList[roll(wrongClassList.length)];
-            while(String(getClass.hit_die) === String(wrongClass.hit_die) || wrongClasses.some(wc => String(wc.hit_die) === String(wrongClass.hit_die))) {
+
+            // reroll if rolled hit die matches answer or is in wrong answer list
+            while(String(getClass.hit_die) === String(wrongClass.hit_die) || 
+            wrongClasses.some(wc => String(wc.hit_die) === String(wrongClass.hit_die))) {
                 wrongClass = wrongClassList[roll(wrongClassList.length)];
             }
 
@@ -89,10 +99,12 @@ if(displayList.length === 0) {
 
         displayList.push({
             q: questionList[q].question(getClass),
-            a: [String(questionList[q].answer(getClass)),
-            String(wrongClasses[0].hit_die),
-            String(wrongClasses[1].hit_die),
-            String(wrongClasses[2].hit_die)]
+            a: [
+                String(questionList[q].answer(getClass)),
+                String(wrongClasses[0].hit_die),
+                String(wrongClasses[1].hit_die),
+                String(wrongClasses[2].hit_die)
+            ]
         });
     }
 
