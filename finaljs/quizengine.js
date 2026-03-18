@@ -44,7 +44,7 @@ export function setupListeners() { document.addEventListener('click', (e) => {
                 localStorage.setItem('classStats', JSON.stringify(classStats));
             } else 
             if(localStorage.getItem('quizType') === 'monster') {
-                monStats.push({currentDate, score});
+                monStats.push({currentDate, score, amountOfQuestions});
                 localStorage.setItem('monStats', JSON.stringify(monStats));
             }
             homeListen();

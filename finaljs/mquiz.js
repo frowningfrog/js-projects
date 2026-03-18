@@ -69,8 +69,6 @@ if(displayList.length === 0) {
   }
 }
 
-console.log(displayList);
-
 renderQ();
 
 setupListeners();

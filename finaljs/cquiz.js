@@ -102,7 +102,6 @@ if(displayList.length === 0) {
     })
   }
   localStorage.setItem('displayList', JSON.stringify(displayList));
-  console.log(displayList);
 }
 
 renderQ();
