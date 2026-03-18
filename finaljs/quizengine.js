@@ -5,7 +5,7 @@ let score = 0;
 let current = 0;
 let correct = false;
 
-export const displayList = /*JSON.parse(localStorage.getItem('displayList')) || */[];
+export const displayList = [];
 let classStats = JSON.parse(localStorage.getItem('classStats')) || [];
 let monStats = JSON.parse(localStorage.getItem('monStats')) || [];
 
