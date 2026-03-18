@@ -10,7 +10,7 @@ if(displayList.length === 0) {
     let wrongMonList = monsters.filter(m => m.name !== getMonster.name);
     let q = roll(questionList.length);
 
-    //skip if already answered for monster
+    // reroll if already answered for monster
     if(answered.some(e => e.mon === getMonster.name)) {
         i--;
         continue;

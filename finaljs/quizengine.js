@@ -1,4 +1,4 @@
-import { roll, statListen } from "./main.js";
+import { roll, statListen, amountOfQuestions } from "./main.js";
 import { homeListen } from "./stats.js";
 
 let score = 0;
@@ -40,7 +40,7 @@ export function setupListeners() { document.addEventListener('click', (e) => {
             localStorage.removeItem('displayList');
             const currentDate = new Date().toLocaleDateString('en-US');
             if(localStorage.getItem('quizType') === 'class') {
-                classStats.push({currentDate, score});
+                classStats.push({currentDate, score, amountOfQuestions});
                 localStorage.setItem('classStats', JSON.stringify(classStats));
             } else 
             if(localStorage.getItem('quizType') === 'monster') {

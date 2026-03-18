@@ -10,7 +10,7 @@ if(displayList.length === 0) {
     let wrongClassList = classes.filter(c => c.name !== getClass.name);
     let q = roll(questionList.length);
 
-    //skip question if already been answered for this class
+    //reroll question if already been answered for this class
     if(answered.some(e => e.class === getClass.name && e.question === questionList[q].question(getClass))) {
         i--;
         continue;
@@ -38,14 +38,9 @@ if(displayList.length === 0) {
             }
 
             wrongClasses.push({wrongClass, wrongLev, wrongFea});
-
-            // if(wrongClasses.length === 3) {
-            //     wrongClasses.forEach(wc => console.log(wc.wrongClass.name));
-            // };
-            // console.log('---');
         }
 
-        // skip if no features or is ability score improvement
+        // reroll if no features or is ability score improvement
         while(getClass.levels[lev].features.length === 0 || getClass.levels[lev].features[fea].name === 'Ability Score Improvement') {
             lev = roll(getClass.levels.length);
             fea = roll(getClass.levels[lev].features.length);
@@ -72,11 +67,6 @@ if(displayList.length === 0) {
             }
 
             wrongClasses.push(wrongClass);
-
-            // if(wrongClasses.length === 3) {
-            //     wrongClasses.forEach(wc => console.log(wc.name));
-            // };
-            // console.log('---');
         }
 
         displayList.push({
@@ -95,11 +85,6 @@ if(displayList.length === 0) {
             }
 
             wrongClasses.push(wrongClass);
-
-            // if(wrongClasses.length === 3) {
-            //     wrongClasses.forEach(wc => console.log(wc.name));
-            // };
-            // console.log('---');
         }
 
         displayList.push({
