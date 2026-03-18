@@ -5,12 +5,12 @@ import { renderQ, setupListeners, displayList } from "./quizengine.js";
 const questionList = mquestions;
 
 if(displayList.length === 0) {
-  for(let i=0; i<amountOfQuestions; i++) {
+  for(let i = 0; i < amountOfQuestions; i++) {
     let getMonster = monsters[roll(monsters.length)];
     let wrongMonList = monsters.filter(m => m.name !== getMonster.name);
     let q = roll(questionList.length);
 
-    // reroll if already answered for monster
+    // get another monster if already used
     if(answered.some(e => e.mon === getMonster.name)) {
         i--;
         continue;
@@ -23,6 +23,7 @@ if(displayList.length === 0) {
         for(let wm = 0; wm < 3; wm++) {
             wrongMon = wrongMonList[roll(wrongMonList.length)];
 
+            // reroll if rolled monster type matches wm list or answer
             if(wrongMons.some(wmon => wmon.type === wrongMon.type) || wrongMon.type === getMonster.type) {
                 --wm;
             } else {
@@ -44,6 +45,7 @@ if(displayList.length === 0) {
         for(let wm = 0; wm < 3; wm++) {
             wrongMon = wrongMonList[roll(wrongMonList.length)];
 
+            // reroll if rolled monster hp matches wm list or answer
             if(wrongMons.some(wmon => wmon.hit_points === wrongMon.hit_points) || wrongMon.hit_points === getMonster.hit_points) {
                 --wm;
             } else {

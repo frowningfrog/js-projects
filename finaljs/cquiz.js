@@ -5,7 +5,7 @@ import { renderQ, setupListeners, displayList } from "./quizengine.js";
 const questionList = cquestions;
 
 if(displayList.length === 0) {
-  for(let i=0; i<amountOfQuestions; i++) {
+  for(let i = 0; i < amountOfQuestions; i++) {
     let getClass = classes[roll(classes.length)];
     let wrongClassList = classes.filter(c => c.name !== getClass.name);
     let q = roll(questionList.length);

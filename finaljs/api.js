@@ -10,6 +10,7 @@ export async function getClasses() {
   const cpromises = [];
   const lpromises = [];
   
+  // the 20 levels for each class take too long in a graphql for some reason
   for(let i=0; i<data.results.length; i++) {
     const c = fetch("https://www.dnd5eapi.co" + data.results[i].url).then(r => r.ok ? r.json() : console.error('Yikes, Failed to fetch classes data'));
     const l = fetch("https://www.dnd5eapi.co" + data.results[i].url + "/levels").then(r => r.ok ? r.json() : console.error('Yikes, Failed to fetch classes data'));
@@ -46,6 +47,7 @@ const GetMonstersQuery = `
 `;
 
 export async function getMonsters() {
+  // for loop takes too long for over 300 monsters
   const monsters = await fetch("https://www.dnd5eapi.co/graphql/2014", {
     method: "POST",
     headers: {
