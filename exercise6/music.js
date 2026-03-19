@@ -40,6 +40,14 @@ class playlist {
             this.tail.next = this.head;
         }
     }
+
+    next(current) {
+        return current.next;
+    }
+
+    prev(current) {
+        return current.prev;
+    }
 }
 
 const coolsongs = new playlist();
@@ -62,11 +70,11 @@ document.getElementById('control').addEventListener('click', () => {
 });
 
 document.getElementById('next').addEventListener('click', () => {
-    current = current.next;
+    current = coolsongs.next(current);
     render(control, current);
 });
 
 document.getElementById('prev').addEventListener('click', () => {
-    current = current.prev;
+    current = coolsongs.prev(current);
     render(control, current);
 });
