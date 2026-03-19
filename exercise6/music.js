@@ -1,4 +1,16 @@
-document.getElementById('status').innerText = 'Playing:';
+let control = 'Playing:';
+
+function render(control, current) {
+    let btn = '';
+    document.getElementById('title').innerText = `${current.data}`;
+    document.getElementById('status').innerText = control;
+    if(control === 'Playing:') {
+        btn = 'Pause';
+    } else {
+        btn = 'Play';
+    }
+    document.getElementById('control').innerText = btn;
+}
 
 class Node {
     constructor(thing){
@@ -36,4 +48,25 @@ coolsongs.addItem(`Harder Better Faster Stronger`);
 coolsongs.addItem(`Fireflies`);
 coolsongs.addItem(`Vanilla Twilight`);
 
-document.getElementById('title').innerText = `${coolsongs.head.data}`;
+let current = coolsongs.head;
+
+render(control, current);
+
+document.getElementById('control').addEventListener('click', () => {
+    if(control === 'Playing:') {
+        control = 'Paused:';
+    } else {
+        control = 'Playing:';
+    }
+    render(control, current);
+});
+
+document.getElementById('next').addEventListener('click', () => {
+    current = current.next;
+    render(control, current);
+});
+
+document.getElementById('prev').addEventListener('click', () => {
+    current = current.prev;
+    render(control, current);
+});
