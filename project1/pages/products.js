@@ -20,11 +20,26 @@ document.addEventListener('click', function(event) {
   if(eventTarget.matches('#add-to-cart-btn')) {
     const productid = eventTarget.getAttribute("data-product-id");
     const foundProduct = products.find(item => {
-      if(item.id === +productid) {
-        cart.push(item);
-      }
       return item.id === +productid;
     });
+
+    let here = false;
+
+    for(let i = 0; i < cart.length; i++) {
+      if(cart[i].id === foundProduct.id) {
+        cart[i].count++;
+        here = true;
+      }
+      if(i === cart.length-1 && here === false) {
+        cart.push(foundProduct);
+        break;
+      }
+    }
+
+    if(cart.length === 0) {
+      cart.push(foundProduct);
+    }
+    
     console.log('Added', foundProduct);
     saveCartToLocalStorage();
   }

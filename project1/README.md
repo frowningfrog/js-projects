@@ -1,0 +1,1 @@
+Mock Amazon site. Add products to a cart using local storage.
