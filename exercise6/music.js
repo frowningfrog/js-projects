@@ -1,8 +1,8 @@
 let control = 'Playing:';
 
-function render(control, current) {
+function render(control) {
     let btn = '';
-    document.getElementById('title').innerText = `${current.data}`;
+    document.getElementById('title').innerText = `${coolsongs.current.data}`;
     document.getElementById('status').innerText = control;
     if(control === 'Playing:') {
         btn = 'Pause';
@@ -32,6 +32,7 @@ class playlist {
         if(this.head === null){
             this.head = newNode;
             this.tail = newNode;
+            this.current = this.head;
         } else {
             newNode.prev = this.tail;
             this.tail.next = newNode;
@@ -41,12 +42,12 @@ class playlist {
         }
     }
 
-    next(current) {
-        return current.next;
+    next() {
+        this.current = this.current.next;
     }
 
-    prev(current) {
-        return current.prev;
+    prev() {
+        this.current = this.current.prev;
     }
 }
 
@@ -56,9 +57,7 @@ coolsongs.addItem(`Harder Better Faster Stronger`);
 coolsongs.addItem(`Fireflies`);
 coolsongs.addItem(`Vanilla Twilight`);
 
-let current = coolsongs.head;
-
-render(control, current);
+render(control);
 
 document.getElementById('control').addEventListener('click', () => {
     if(control === 'Playing:') {
@@ -66,15 +65,15 @@ document.getElementById('control').addEventListener('click', () => {
     } else {
         control = 'Playing:';
     }
-    render(control, current);
+    render(control);
 });
 
 document.getElementById('next').addEventListener('click', () => {
-    current = coolsongs.next(current);
-    render(control, current);
+    coolsongs.next();
+    render(control);
 });
 
 document.getElementById('prev').addEventListener('click', () => {
-    current = coolsongs.prev(current);
-    render(control, current);
+    coolsongs.prev();
+    render(control);
 });
