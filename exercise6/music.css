@@ -5,3 +5,9 @@
 #status {
     margin-right: 12px;
 }
+
+button {
+  background: #72df68;
+  width: 6em;
+  height: 2em;
+}

@@ -1,9 +1,8 @@
-document.getElementById('status').innerText = 'greetings';
-document.getElementById('title').innerText = 'programs';
+document.getElementById('status').innerText = 'Playing:';
 
 class Node {
-    constructor(data){
-        this.data = data;
+    constructor(thing){
+        this.data = thing;
         this.next = null;
         this.prev = null;
     }
@@ -15,22 +14,26 @@ class playlist {
         this.tail = null;
     }
 
-    append(data){
-        const newNode = new Node(data);
+    addItem(song) {
+        const newNode = new Node(song);
 
         if(this.head === null){
             this.head = newNode;
             this.tail = newNode;
         } else {
-            this.tail.next = newNode;
             newNode.prev = this.tail;
-            this.tail = newNode;
+            this.tail.next = newNode;
+            this.tail = this.tail.next;
+            this.head.prev = this.tail;
+            this.tail.next = this.head;
         }
     }
 }
 
 const coolsongs = new playlist();
-coolsongs.append(`Derezzed`);
-coolsongs.append(`Harder Better Faster Stronger`);
+coolsongs.addItem(`Derezzed`);
+coolsongs.addItem(`Harder Better Faster Stronger`);
+coolsongs.addItem(`Fireflies`);
+coolsongs.addItem(`Vanilla Twilight`);
 
-console.log(coolsongs);
+document.getElementById('title').innerText = `${coolsongs.head.data}`;
